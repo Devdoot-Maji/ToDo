@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+</head>
+<body>
+    <div django-app="TaskManager">        
+        <div class="container">
+            <div class="content">
+                <form action="" method="post">
+                {% csrf_token %}
+                    <div class="inputContainer">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" class="taskName" placeholder="What do you need to do?" name="description" required>
+                    </div>
+                    <div class="inputContainer half last right">
+                        <label for="date">Date</label>
+                        <input type="date" id="dueDate" class="taskDate" name="date">
+                    </div>
+                    <div class="row">
+                        <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
+                    </div>
+                    <ul class="taskList">
+                    {% for todo in todos %}
+                        <li class="taskItem">
+                            <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
+                            <label for="{{ todo.id }}">{{ todo.title }}</span></label>
+                            <label for="{{ todo.content }}">{{ todo.content }}</span></label>
+                            <strong class="taskDate"><i class="fa fa-calendar"></i>{{ todo.date }}</strong>
+                        </li>
+                    {% endfor %}
+                    </ul><!-- taskList -->
+                </form>
+            </div><!-- content -->
+        </div><!-- container -->
+    </div>
+</body>
+</html>
