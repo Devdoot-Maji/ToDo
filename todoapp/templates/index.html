@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web site created using Django Web Framework">
+    <meta name="description" content="Created and Maintained by Devdoot Maji">
     <title>ToDo</title>
-</head>
-<body>
-    <div django-app="TaskManager">        
-        <div class="container">
-            <div class="content">
-                <form action="" method="post">
-                {% csrf_token %}
-                    <div class="inputContainer">
-                        <label for="description">Description</label>
-                        <input type="text" id="description" class="taskName" placeholder="What do you need to do?" name="description" required>
-                    </div>
-                    <div class="inputContainer half last right">
-                        <label for="date">Date</label>
-                        <input type="date" id="dueDate" class="taskDate" name="date">
-                    </div>
-                    <div class="row">
-                        <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
-                    </div>
-                    <ul class="taskList">
-                    {% for todo in todos %}
-                        <li class="taskItem">
-                            <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
-                            <label for="{{ todo.id }}">{{ todo.title }}</span></label>
-                            <label for="{{ todo.content }}">{{ todo.content }}</span></label>
-                            <strong class="taskDate"><i class="fa fa-calendar"></i>{{ todo.date }}</strong>
-                        </li>
-                    {% endfor %}
-                    </ul><!-- taskList -->
-                </form>
-            </div><!-- content -->
-        </div><!-- container -->
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '../static/css/style.css' %}"
+    />
+    <link
+      href="{% static '../static/icons/WebFont/font-css/LineIcons.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="navigation">
+      <form action="{% url 'logout' %}">
+          <button class="btn2" name="logout" type="submit">LOGOUt</button>
+      </form>
     </div>
-</body>
+    <div class="container">
+      <div id="displayContent">
+        <div class="title">
+          <img src="../static/img/ToDo.png" alt="Image" class="titleimg" />
+        </div>
+        <a class="btn1" name="taskAdd" type="submit" href="{% url 'addtask' %}">
+          Add task
+        </a>
+        {% for todo in todos %}
+        <div class="row">
+          {% if todo.completed %}
+          <div class="column1">
+            <a name="taskDone" href="{% url 'donetask' todo.id %}" type="submit">
+              <img class="strike interaction" src="../static/img/tick.png" alt="Image"/>
+            </a>
+          </div>
+          <div class="column2">
+            <p class="todo_id strike">{{ todo.title }}</p>
+            <p class="todo_content strike">{{ todo.content }}</p>
+            <p class="taskDate strike">{{ todo.date }}</p>
+          </div>
+          <div class="column3">
+            <a name="taskDelete" href="{% url 'deletetask' todo.id %}">
+              <img class="strike interaction" src="../static/img/trash.png" alt="Image"/>
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <div class="column1">
+          <a name="taskDone" href="{% url 'donetask' todo.id %}" type="submit">
+            <img class="interaction" src="../static/img/tick.png" alt="Image"/>
+          </a>
+        </div>
+        <div class="column2">
+          <p class="todo_id">{{ todo.title }}</p>
+          <p class="todo_content">{{ todo.content }}</p>
+          <p class="taskDate">{{ todo.date }}</p>
+        </div>
+        <div class="column3">
+          <a name="taskDelete" href="{% url 'deletetask' todo.id %}">
+            <img class="interaction" src="../static/img/trash.png" alt="Image"/>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </body>
 </html>
