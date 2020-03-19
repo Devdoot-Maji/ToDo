@@ -26,6 +26,7 @@
     <div class="container">
       <div id="displayContent">
         <div class="title">
+          {% load static %}
           <img src="../static/img/ToDo.png" alt="Image" class="titleimg" />
         </div>
         <a class="btn1" name="taskAdd" type="submit" href="{% url 'addtask' %}">
@@ -36,6 +37,7 @@
           {% if todo.completed %}
           <div class="column1">
             <a name="taskDone" href="{% url 'donetask' todo.id %}" type="submit">
+              {% load static %}
               <img class="strike interaction" src="../static/img/tick.png" alt="Image"/>
             </a>
           </div>
@@ -46,6 +48,7 @@
           </div>
           <div class="column3">
             <a name="taskDelete" href="{% url 'deletetask' todo.id %}">
+              {% load static %}
               <img class="strike interaction" src="../static/img/trash.png" alt="Image"/>
             </a>
           </div>
@@ -53,6 +56,7 @@
         {% else %}
         <div class="column1">
           <a name="taskDone" href="{% url 'donetask' todo.id %}" type="submit">
+            {% load static %}
             <img class="interaction" src="../static/img/tick.png" alt="Image"/>
           </a>
         </div>
@@ -63,6 +67,7 @@
         </div>
         <div class="column3">
           <a name="taskDelete" href="{% url 'deletetask' todo.id %}">
+            {% load static %}
             <img class="interaction" src="../static/img/trash.png" alt="Image"/>
           </a>
         </div>
