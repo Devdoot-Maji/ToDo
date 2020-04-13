@@ -20,8 +20,10 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static '../static/css/style.css' %}"
+      href="{% static 'css/style.css' %}"
     />
+    {% load static %}
+    <link rel="icon" href="{% static 'img/favicon.png' %}" />
   </head>
 
   <body>

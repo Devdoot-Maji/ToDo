@@ -13,8 +13,10 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static '../static/css/style.css' %}"
+      href="{% static 'css/style.css' %}"
     />
+    {% load static %}
+    <link rel="icon" href="{% static 'img/favicon.png' %}" />
   </head>
   <body>
     {% if form.errors %} {% for field in form %} {% for error in field.errors %}
@@ -46,7 +48,7 @@
       <div id="formContent">
         <div class="title">
           {% load static %}
-          <img src="../static/img/ToDo.png" alt="Image" class="titleimg" />
+          <img src="{% static 'img/ToDo.png' %}" alt="Image" class="titleimg" />
           <br />
         </div>
         <form method="POST" class="signup-form">
